@@ -7,7 +7,7 @@ import { Layout } from "@/components/layout";
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout hide={{ header: true }}>
       {/* 
         Header
       */}
@@ -28,13 +28,15 @@ export default function Home() {
                 </p>
               </div>
               <div className="space-x-4">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="bg-accent text-accent-foreground bg-gradient-to-r from-red-500 to-orange-500"
-                >
-                  Get Started
-                </Button>
+                <Link href="/dashboard">
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="bg-accent text-accent-foreground bg-gradient-to-r from-red-500 to-orange-500"
+                  >
+                    Get Started
+                  </Button>
+                </Link>
                 <a href="#features">
                   <Button
                     variant="outline"
@@ -55,14 +57,14 @@ export default function Home() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="flex flex-col items-center text-center">
-                <Zap className="h-12 w-12 text-accent mb-4" />
+                <Zap className="h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className="text-xl font-bold mb-2">Lightning Fast</h3>
                 <p className="text-muted-foreground">
                   Experience blazing fast transaction speeds and low latency.
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <Lock className="h-12 w-12 text-accent mb-4" />
+                <Lock className="h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className="text-xl font-bold mb-2">Secure & Reliable</h3>
                 <p className="text-muted-foreground">
                   Built with cutting-edge security measures to protect your
@@ -70,7 +72,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <BarChart3 className="h-12 w-12 text-accent mb-4" />
+                <BarChart3 className="h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className="text-xl font-bold mb-2">
                   Concentrated Liquidity
                 </h3>
