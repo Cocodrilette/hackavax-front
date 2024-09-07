@@ -16,24 +16,28 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PlusCircle, Users, Zap } from "lucide-react";
 import { Layout } from "@/components/layout";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [votingTopics, setVotingTopics] = useState([
     {
       id: 1,
       title: "Energy Price for Q3",
+      slug: "energy-price-q3",
       options: ["$0.10/kWh", "$0.12/kWh", "$0.15/kWh"],
       votes: [5, 8, 3],
     },
     {
       id: 2,
       title: "Solar Panel Installation",
+      slug: "solar-panel-installation",
       options: ["Yes", "No", "Postpone"],
       votes: [10, 2, 4],
     },
     {
       id: 3,
       title: "Energy Distribution Plan",
+      slug: "energy-distribution-plan",
       options: ["Plan A", "Plan B", "Plan C"],
       votes: [6, 7, 3],
     },
@@ -64,7 +68,12 @@ export default function Dashboard() {
     ) {
       setVotingTopics([
         ...votingTopics,
-        { id: Date.now(), ...newTopic, votes: [0, 0, 0] },
+        {
+          id: Date.now(),
+          ...newTopic,
+          votes: [0, 0, 0],
+          slug: "",
+        },
       ]);
       setNewTopic({ title: "", options: ["", "", ""] });
     }
@@ -135,21 +144,32 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 {votingTopics.map((topic) => (
-                  <div key={topic.id} className="mb-6">
-                    <h3 className="text-lg font-semibold mb-2">
-                      {topic.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {topic.options.map((option, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          onClick={() => handleVote(topic.id, index)}
-                        >
-                          {option} ({topic.votes[index]})
-                        </Button>
-                      ))}
+                  <div
+                    key={topic.id}
+                    className="mb-6 flex justify-between items-center"
+                  >
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {topic.title}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {topic.options.map((option, index) => (
+                          <Button
+                            key={index}
+                            variant="outline"
+                            onClick={() => handleVote(topic.id, index)}
+                          >
+                            {option} ({topic.votes[index]})
+                          </Button>
+                        ))}
+                      </div>
                     </div>
+                    <Link
+                      className="bg-black text-white py-2 px-3 rounded-md"
+                      href={`/forum/${topic.slug}`}
+                    >
+                      Go to forum
+                    </Link>
                   </div>
                 ))}
               </CardContent>

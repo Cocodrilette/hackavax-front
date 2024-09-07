@@ -2,6 +2,7 @@ import { ConnectKitButton } from "connectkit";
 import { Layers } from "lucide-react";
 import localFont from "next/font/local";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,6 +25,9 @@ export function Layout({
     footer?: boolean;
   };
 }) {
+  const router = useRouter();
+  const path = router.asPath;
+
   return (
     <div
       className={`flex flex-col min-h-screen ${geistMono.variable} ${geistSans.variable} font-[family-name:var(--font-geist-sans)]`}
@@ -36,7 +40,12 @@ export function Layout({
               <Link href="/">UniChain</Link>
             </span>
           </Link>
-          <nav className="ml-auto flex gap-4 sm:gap-6">
+          <nav className="ml-auto flex items-center gap-4 sm:gap-6">
+            {path.includes("forum") && (
+              <Link className="bg-black text-white py-2 px-3" href="/dashboard">
+                Back to Dashboard
+              </Link>
+            )}
             <ConnectKitButton />
           </nav>
         </header>
