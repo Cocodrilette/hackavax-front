@@ -5,7 +5,9 @@ export default function Forum() {
   const router = useRouter();
   return (
     <Layout>
-      <p>Post: {router.query.slug}</p>
+      <div className="container mx-auto p-4">
+        <p>Post: {router.query.slug}</p>
+      </div>
     </Layout>
   );
 }
